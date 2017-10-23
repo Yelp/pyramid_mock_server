@@ -1,0 +1,11 @@
+{% patch "base.json" %}
+{
+  "extra": "extra",
+  "value": "patch",
+  "attr1": {
+    "attr2": {
+      "value": "patch"
+    }
+  }
+}
+{% endpatch %}

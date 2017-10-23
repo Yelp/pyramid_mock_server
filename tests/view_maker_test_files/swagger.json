@@ -1,0 +1,118 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "Swagger Mock Server Test Spec",
+    "version" : "1.0.0"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo" :{
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "description": "testing query parameters",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "testing query parameters",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foo response",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/foo/{foo_id}/v1": {
+      "parameters": [{
+          "in": "path",
+          "description": "Foo identifier",
+          "name": "foo_id",
+          "required": true,
+          "type": "string"
+        }],
+      "get": {
+        "responses": {
+          "default": {
+            "description": "Foo response",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          }
+        },
+        "tags": ["tag_1", "tag_2"]
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Foo response",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          }
+        },
+        "tags": ["tag_1", "tag_2"]
+      }
+    },
+    "/foo/bar" :{
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Foo bar response",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/exclude_me":{
+      "get": {
+        "responses": {
+	  "200": {
+	    "description": "I am excluded",
+	    "schema": {
+	      "$ref": "#/definitions/TestResponse"
+	    }
+	  }
+	}
+      }
+    },
+    "/exclude_me/am_i_excluded": {
+      "get": {
+        "responses": {
+	  "200": {
+	    "description": "I should be excluded as well",
+	    "schema": {
+	      "$ref": "#/definitions/TestResponse"
+	    }
+	  }
+	}
+      }
+    }
+  },
+  "definitions": {
+    "TestResponse": {
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{% override "base.json" %}
+{
+  "attr1": "override"
+}
+{% endoverride %}
