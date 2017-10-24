@@ -1,3 +1,8 @@
+![https://travis-ci.org/Yelp/pyramid_mock_server?branch=master](https://img.shields.io/travis/Yelp/pyramid_mock_server.svg)
+![https://coveralls.io/r/Yelp/pyramid_mock_server](https://img.shields.io/coveralls/Yelp/pyramid_mock_server.svg)
+![https://pypi.python.org/pypi/pyramid_mock_server/](https://img.shields.io/pypi/pyversions/pyramid_mock_server.svg)
+![https://pypi.python.org/pypi/pyramid_mock_server/](https://img.shields.io/pypi/v/pyramid_mock_server.svg)
+
 # pyramid_mock_server
 Auto-create a pyramid app from an API description and json response files.
 
