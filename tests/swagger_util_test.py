@@ -11,6 +11,43 @@ from pyramid_mock_server.response_collection import ResponseCollection
 from pyramid_mock_server.swagger_util import get_all_mocks_operations
 from pyramid_mock_server.swagger_util import get_swagger20_resources_iterator_from_pyramid_swagger
 from pyramid_mock_server.swagger_util import query_url_formatter
+from bravado_core.spec import Spec
+
+
+def make_spec_from_dict(overrides=None):
+    spec_dict = {
+        "swagger": "2.0",
+        "info": {
+            "title": "test",
+            "version": "1.0.0"
+        },
+        "paths": {
+            '/pet': {
+                'get': {
+                    'responses': {
+                        '200': {
+                            'description': 'Returns a Pet',
+                            'schema': {
+                                'x-model': 'Pet',
+                                'type': 'object',
+                                'properties': {
+                                    'name': {
+                                        'type': 'string'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "definitions": {},
+    }
+
+    if overrides:
+        spec_dict.update(overrides)
+
+    return Spec.from_dict(spec_dict)
 
 
 @pytest.mark.parametrize(
@@ -45,7 +82,7 @@ def test_get_all_mocks_operations():
     ])
 
 
-def test_get_swagger20_resources_iterator_from_pyramid_swagger():
+def test_get_swagger20_resources_iterator_from_pyramid_swagger_no_spec():
     config = mock.Mock(
         registry=mock.Mock(
             settings={},
@@ -56,6 +93,28 @@ def test_get_swagger20_resources_iterator_from_pyramid_swagger():
 
     assert len(record) == 1
     assert str(record[0].message) == 'read_resources_from_pyramid_swagger is True but pyramid_swagger is not available'  # noqa
+
+
+@pytest.mark.parametrize(
+    'spec_dict_overrides, result',
+    [
+        (None, [('/pet', 'get')]),
+        ({'basePath': '/base_path'}, [('/base_path/pet', 'get')]),
+    ]
+)
+def test_get_swagger20_resources_iterator_from_pyramid_swagger(spec_dict_overrides, result):
+    config = mock.Mock(
+        registry=mock.Mock(
+            settings={
+                'pyramid_swagger.schema20': make_spec_from_dict(spec_dict_overrides),
+            },
+        )
+    )
+
+    with pytest.warns(None):
+        resources = list(get_swagger20_resources_iterator_from_pyramid_swagger(config))
+
+    assert resources == result
 
 
 def test_includeme():
