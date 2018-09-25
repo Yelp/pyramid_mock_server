@@ -10,7 +10,7 @@ base_dir = os.path.dirname(__file__)
 setup(
     name='pyramid_mock_server',
     version='1.1.1',
-    licence='BSD 3-Clause License',
+    license='BSD 3-Clause License',
 
     description='Create pyramid server that return mocked response from an OpenAPI spec',
     long_description=open(os.path.join(base_dir, 'README.md')).read(),
