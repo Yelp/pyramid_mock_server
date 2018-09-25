@@ -9,7 +9,7 @@ base_dir = os.path.dirname(__file__)
 
 setup(
     name='pyramid_mock_server',
-    version='1.1.1',
+    version='1.2.0',
     license='BSD 3-Clause License',
 
     description='Create pyramid server that return mocked response from an OpenAPI spec',
