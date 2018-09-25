@@ -74,6 +74,7 @@ def get_swagger20_resources_iterator_from_pyramid_swagger(config):
             'read_resources_from_pyramid_swagger is True but pyramid_swagger is not available'
         )
     else:
+        base_path = swagger_schema.spec_dict.get('basePath', '').rstrip('/')
         for resource in six.itervalues(swagger_schema.resources):
             for op in six.itervalues(resource.operations):
-                yield op.path_name, op.http_method
+                yield base_path + op.path_name, op.http_method
