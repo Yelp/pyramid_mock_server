@@ -1,14 +1,14 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "title" : "Swagger Mock Server Test Spec",
-    "version" : "1.0.0"
+  "swagger": "2.0",
+  "info": {
+    "title": "Swagger Mock Server Test Spec",
+    "version": "1.0.0"
   },
   "produces": [
     "application/json"
   ],
   "paths": {
-    "/foo" :{
+    "/foo": {
       "get": {
         "parameters": [
           {
@@ -35,13 +35,15 @@
       }
     },
     "/foo/{foo_id}/v1": {
-      "parameters": [{
+      "parameters": [
+        {
           "in": "path",
           "description": "Foo identifier",
           "name": "foo_id",
           "required": true,
           "type": "string"
-        }],
+        }
+      ],
       "get": {
         "responses": {
           "default": {
@@ -51,7 +53,10 @@
             }
           }
         },
-        "tags": ["tag_1", "tag_2"]
+        "tags": [
+          "tag_1",
+          "tag_2"
+        ]
       },
       "post": {
         "responses": {
@@ -62,10 +67,13 @@
             }
           }
         },
-        "tags": ["tag_1", "tag_2"]
+        "tags": [
+          "tag_1",
+          "tag_2"
+        ]
       }
     },
-    "/foo/bar" :{
+    "/foo/bar": {
       "post": {
         "responses": {
           "200": {
@@ -77,28 +85,48 @@
         }
       }
     },
-    "/exclude_me":{
+    "/exclude_me": {
       "get": {
         "responses": {
-	  "200": {
-	    "description": "I am excluded",
-	    "schema": {
-	      "$ref": "#/definitions/TestResponse"
-	    }
-	  }
-	}
+          "200": {
+            "description": "I am excluded",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          }
+        }
       }
     },
     "/exclude_me/am_i_excluded": {
       "get": {
         "responses": {
-	  "200": {
-	    "description": "I should be excluded as well",
-	    "schema": {
-	      "$ref": "#/definitions/TestResponse"
-	    }
-	  }
-	}
+          "200": {
+            "description": "I should be excluded as well",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/mock/via/custom/view": {
+      "parameters": [
+        {
+          "in": "query",
+          "name": "optional_query",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "The response is generated via a custom view",
+            "schema": {
+              "$ref": "#/definitions/TestResponse"
+            }
+          }
+        }
       }
     }
   },

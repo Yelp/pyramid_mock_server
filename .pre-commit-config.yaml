@@ -8,6 +8,7 @@ repos:
     -   id: debug-statements
     -   id: name-tests-test
         files: ^tests/.+\.py$
+        exclude: ^tests/view_maker_test_files/custom_views/views\.py$
     -   id: fix-encoding-pragma
     -   id: flake8
         exclude: ^docs
@@ -20,6 +21,7 @@ repos:
             '--add-import', 'from __future__ import unicode_literals',
         ]
         files: ^(pyramid_mock_server/|tests/).*\.py$
+        exclude: ^tests/view_maker_test_files/custom_views/views\.py$
         language_version: python2.7
 -   repo: https://github.com/pre-commit/mirrors-autopep8
     rev: v1.4.3

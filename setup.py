@@ -39,5 +39,11 @@ setup(
     ],
     extra_requires={
         'Swagger': ['pyramid_swagger >= 2.3.0'],
+        'cli': ['bravado_core', 'pyramid_swagger >= 2.3.0', 'webtest'],
+    },
+    entry_points={
+        'console_scripts': [
+            'pyramid-mock-server-spec-enhancer=pyramid_mock_server.enhance_swagger_spec:main',
+        ],
     },
 )
