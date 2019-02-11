@@ -1,9 +1,11 @@
-.PHONY: test, clean, docs
+.PHONY: test clean docs
 
 dev:
 	tox -e pre-commit install
+
 test:
 	tox -e py27,py36
+
 clean:
 	find . -type f -iname "*.py[co]" -delete
 	find . -name '__pycache__' -delete
@@ -11,5 +13,6 @@ clean:
 	rm -rf .tox/
 	rm -rf docs/build
 	rm .coverage
+
 docs:
 	tox -e docs

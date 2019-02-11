@@ -10,7 +10,7 @@ This package allows to quickly setup a pyramid application from carefully named 
 files and a list of endpoints that should exist.
 
 The initial rationale for this package was to serve mocks to clients for endpoints that where not
-yet developed, but for which the OpenAPI spec was already existing.
+yet developed, but for which the `Swagger 2.0 <https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md>`_ spec was already existing.
 
 As such it as some utility to easily read the list of endpoints from a OpenAPI spec.
 
@@ -60,23 +60,17 @@ Configuration
     config.include('pyramid_mock_server')
 
 
-* **``pyramid_mock_server.mock_responses_path``**  path to the directory where your mocks live (Required)
-* **``pyramid_mock_server.resources``** pairs of endpoint path, HTTP verbs that the mocks describe (default: ``[]``)
-* **``pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema``** if True, reads the ``pyramid_swagger`` 2.0 swagger schema to generate resources. (Optional, default: ``False``)
-* **``pyramid_mock_server.excluded_paths``** paths that might be in resources (or swagger) but you want ignored. (Optional, default: ``None``)
-* **``pyramid_mock_server.custom_view_packages``** array of packages to import custom views from (Optional, default: ``None``)
+* ``pyramid_mock_server.mock_responses_path``  path to the directory where your mocks live (Required)
+* ``pyramid_mock_server.resources`` pairs of endpoint path, HTTP verbs that the mocks describe (default: ``[]``)
+* ``pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema`` if ``True``, reads the ``pyramid_swagger`` swagger 2.0 schema to generate resources. (Optional, default: ``False``)
+* ``pyramid_mock_server.excluded_paths`` paths that might be in resources (or swagger) but you want ignored. (Optional, default: ``None``)
+* ``pyramid_mock_server.custom_view_packages`` array of packages to import custom views from (Optional, default: ``None``)
 
 
-If you are also using ``pyramid_swagger``, and want the integration, remember to include it first.
-Failure to do so will result in a warning.
+.. note::
+    If you enable ``pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema`` configuration make sure that `pyramid_swagger` is installed on your virtual environment.
 
-.. code-block:: python
-
-    config.include('pyramid_swagger')
-
-    # This should always be included after pyramid_swagger if
-    # `get_resources_from_pyramid_swagger_2_0_schema` is used
-    config.include('pyramid_mock_server')
+    You could use ``pyramid-swagger`` extra dependency while installing ``pyramid-mock-server`` (``pip install pyramid-mock-server[pyramid-swagger]``).
 
 Custom Views
 ^^^^^^^^^^^^
@@ -276,3 +270,32 @@ The second one calls all the mocks that you have defined with the correct parame
         Test that all views (URL, HTTP operation) respond HTTP 200.
         """
         mock_app.request(path, method=request_method, status=200)
+
+Enhance Swagger Specs
+---------------------
+While working on the implementation of Swagger 2.0 endpoint could nice to have examples of responses in the swagger specs themselves
+
+.. code-block:: yaml
+
+    swagger: "2.0"
+    info:
+        title: Swagger Mock Server Test Spec
+        version: 1.0.0
+    produces: [application/json]
+    paths:
+      /endpoint:
+        get:
+          responses:
+            '200':
+              description: OK response
+              schema:
+                type: string
+              examples:
+                application/json:
+                  "example of response"
+
+
+``pyramid-mock-server`` provides a cli tool, ``pyramid-mock-server-spec-enhancer`` , to injects mock server responses into the examples section of the swagger specs.
+
+.. note::
+    To use the tool you need to install the library with ``cli`` extra dependency (``pip install pyramid-mock-server[cli]``)

@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 import venusian
 from pyramid.response import Response
+from six import string_types
 
 from pyramid_mock_server.mock_loader import load_responses
 from pyramid_mock_server.response_collection import ResponseCollection
@@ -89,8 +90,14 @@ def setup_routes_views(
     responses = load_responses(responses_path)
     response_collections = ResponseCollection(responses)
 
-    for package in custom_view_packages:
-        _collect_custom_views(package, view_registry)
+    for package_or_path in custom_view_packages:
+        if isinstance(package_or_path, string_types):
+            python_package = config.name_resolver.maybe_resolve(package_or_path.replace('/', '.'))
+        else:
+            python_package = package_or_path
+
+        if python_package:  # pragma: no branch
+            _collect_custom_views(python_package, view_registry)
 
     for endpoint_path, http_verb in resources:
         endpoint_operation = make_operation_from_path(endpoint_path, http_verb)

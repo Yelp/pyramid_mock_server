@@ -5,18 +5,26 @@ from __future__ import unicode_literals
 import sys
 
 import pytest
-from conftest import create_test_app
+from .conftest import create_test_app
 from pyramid.response import Response
 
 from pyramid_mock_server.view_maker import register_custom_view
 
 
-@pytest.fixture(scope='session')
-def mock_app():
+@pytest.fixture(
+    scope='session',
+    params=[True, False],
+    ids=['custom_view_packages_as_string', 'custom_view_packages_as_python_module'],
+)
+def mock_app(request):
+    custom_view_packages = __name__
+    if not request.param:
+        custom_view_packages = sys.modules[custom_view_packages]
+
     return create_test_app(
         'tests/view_maker_test_files',
         'tests/view_maker_test_files/responses',
-        packages=[sys.modules[__name__]],
+        packages=[custom_view_packages],
     )
 
 

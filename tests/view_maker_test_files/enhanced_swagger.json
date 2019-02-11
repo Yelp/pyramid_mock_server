@@ -1,0 +1,193 @@
+{
+  "definitions": {
+    "TestResponse": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ],
+      "type": "object",
+      "x-model": "TestResponse"
+    }
+  },
+  "info": {
+    "title": "Swagger Mock Server Test Spec",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/exclude_me": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "I am excluded",
+            "examples": {
+              "application/json": {
+                "message": "I am not excluded yet"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TestResponse",
+              "x-scope": [
+                ""
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/exclude_me/am_i_excluded": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "I should be excluded as well",
+            "examples": {
+              "application/json": {
+                "message": "I am not excluded yet, am i?"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TestResponse",
+              "x-scope": [
+                ""
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/foo": {
+      "get": {
+        "parameters": [
+          {
+            "description": "testing query parameters",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "testing query parameters",
+            "in": "query",
+            "name": "offset",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Foo response",
+            "examples": {
+              "application/json": {
+                "message": "You got foo"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TestResponse",
+              "x-scope": [
+                ""
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/foo/bar": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Foo bar response",
+            "schema": {
+              "$ref": "#/definitions/TestResponse",
+              "x-scope": [
+                ""
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/foo/{foo_id}/v1": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": "Foo response",
+            "schema": {
+              "$ref": "#/definitions/TestResponse",
+              "x-scope": [
+                ""
+              ]
+            }
+          }
+        },
+        "tags": [
+          "tag_1",
+          "tag_2"
+        ]
+      },
+      "parameters": [
+        {
+          "description": "Foo identifier",
+          "in": "path",
+          "name": "foo_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "responses": {
+          "200": {
+            "description": "Foo response",
+            "examples": {
+              "application/json": {
+                "message": "default/post"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/TestResponse",
+              "x-scope": [
+                ""
+              ]
+            }
+          }
+        },
+        "tags": [
+          "tag_1",
+          "tag_2"
+        ]
+      }
+    },
+    "/mock/via/custom/view": {
+      "parameters": [
+        {
+          "in": "query",
+          "name": "optional_query",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "The response is generated via a custom view",
+            "schema": {
+              "$ref": "#/definitions/TestResponse",
+              "x-scope": [
+                ""
+              ]
+            },
+            "examples": {
+              "application/json": {
+                "message": "Message from custom view"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0"
+}
