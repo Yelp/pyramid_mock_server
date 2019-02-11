@@ -37,7 +37,7 @@ setup(
         'six',
         'venusian>=1.0',
     ],
-    extra_requires={
+    extras_require={
         'Swagger': ['pyramid_swagger >= 2.3.0'],
         'cli': ['bravado_core', 'pyramid_swagger >= 2.3.0', 'webtest'],
     },
