@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 import mock
 import pytest
+from bravado_core.spec import Spec
 
 from pyramid_mock_server import includeme
 from pyramid_mock_server.mock_loader import load_responses
@@ -11,7 +12,6 @@ from pyramid_mock_server.response_collection import ResponseCollection
 from pyramid_mock_server.swagger_util import get_all_mocks_operations
 from pyramid_mock_server.swagger_util import get_swagger20_resources_iterator_from_pyramid_swagger
 from pyramid_mock_server.swagger_util import query_url_formatter
-from bravado_core.spec import Spec
 
 
 def make_spec_from_dict(overrides=None):
