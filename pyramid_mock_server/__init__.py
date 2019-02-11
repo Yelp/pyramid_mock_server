@@ -33,8 +33,9 @@ def includeme(config):
             config.include('pyramid_swagger')
         except ImportError:  # pragma: no cover
             print(
-                '`pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema` requires pyramid_swagger '
-                'dependency. Hint: install pyramid-mock-server with the `pyramid-swagger` extra dependency'
+                '`pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema` requires '
+                'pyramid_swagger dependency. Hint: install pyramid-mock-server with the '
+                '`pyramid-swagger` extra dependency',
             )
             six.reraise(*sys.exc_info())
 

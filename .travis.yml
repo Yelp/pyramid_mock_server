@@ -9,12 +9,12 @@ matrix:
     python: "3.6"
 
   - env: TOXENV=docs
-  - env: TOXENV=pep8
+  - env: TOXENV=pre-commit
 
 install:
 - "pip install tox coveralls"
 script:
-- tox -e $TOXENV
+- tox
 after_success:
 - coveralls
 # Faster runs on container based infrastucture
