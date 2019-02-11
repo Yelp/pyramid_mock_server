@@ -3,7 +3,12 @@
 Import this module to add the mocks views to your pyramid app.
 """
 from __future__ import absolute_import
+from __future__ import print_function
 from __future__ import unicode_literals
+
+import sys
+
+import six
 
 from pyramid_mock_server.swagger_util import get_swagger20_resources_iterator_from_pyramid_swagger
 from pyramid_mock_server.view_maker import setup_routes_views
@@ -24,6 +29,15 @@ def includeme(config):
 
     # Read resources from pyramid_swagger
     if settings.get('pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema', False):
+        try:
+            config.include('pyramid_swagger')
+        except ImportError:  # pragma: no cover
+            print(
+                '`pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema` requires pyramid_swagger '
+                'dependency. Hint: install pyramid-mock-server with `Swagger` extra dependency'
+            )
+            six.reraise(*sys.exc_info())
+
         for resource in get_swagger20_resources_iterator_from_pyramid_swagger(config):
             resources.append(resource)
 

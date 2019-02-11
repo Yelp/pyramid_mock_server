@@ -35,8 +35,6 @@ def _mock_server_app(swagger_spec_path, mock_responses_path, custom_view_package
         'pyramid_mock_server.custom_view_packages': custom_view_packages or [],
     })
 
-    config.include('pyramid_swagger')
-    # This is done after pyramid_swagger as `read_resources_from_pyramid_swagger` is used
     config.include('pyramid_mock_server')
 
     return TestApp(config.make_wsgi_app())
