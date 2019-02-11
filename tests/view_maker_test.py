@@ -5,9 +5,9 @@ from __future__ import unicode_literals
 import sys
 
 import pytest
-from .conftest import create_test_app
 from pyramid.response import Response
 
+from .conftest import create_test_app
 from pyramid_mock_server.view_maker import register_custom_view
 
 

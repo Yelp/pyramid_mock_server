@@ -26,8 +26,8 @@ def _mock_server_app(swagger_spec_path, mock_responses_path, custom_view_package
         'pyramid_swagger.schema_directory': os.path.abspath(os.path.dirname(swagger_spec_path)),
         'pyramid_swagger.schema_file': os.path.basename(swagger_spec_path),
         'pyramid_swagger.swagger_versions': ['2.0'],
-        'bravado_core.validate_requests': False,
-        'bravado_core.validate_responses': True,
+        'pyramid_swagger.enable_request_validation': False,
+        'pyramid_swagger.enable_response_validation': True,
 
         # pyramid_mock_server config
         'pyramid_mock_server.mock_responses_path': mock_responses_path,
