@@ -32,14 +32,14 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     install_requires=[
-        'jinja2>=2.7',
-        'pyramid>=1.4',
+        'jinja2 >= 2.7',
+        'pyramid >= 1.4',
         'six',
-        'venusian>=1.0',
+        'venusian >= 1.0',
     ],
     extras_require={
-        'Swagger': ['pyramid_swagger >= 2.3.0'],
-        'cli': ['bravado_core', 'pyramid_swagger >= 2.3.0', 'webtest'],
+        'pyramid-swagger': ['pyramid-swagger >= 2.3.0'],
+        'cli': ['bravado_core', 'pyramid-swagger >= 2.3.0', 'webtest'],
     },
     entry_points={
         'console_scripts': [

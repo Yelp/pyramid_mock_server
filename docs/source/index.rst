@@ -70,7 +70,7 @@ Configuration
 .. note::
     If you enable ``pyramid_mock_server.get_resources_from_pyramid_swagger_2_0_schema`` configuration make sure that `pyramid_swagger` is installed on your virtual environment.
 
-    You could use ``Swagger`` extra dependency while installing ``pyramid-mock-server``.
+    You could use ``pyramid-swagger`` extra dependency while installing ``pyramid-mock-server`` (``pip install pyramid-mock-server[pyramid-swagger]``).
 
 Custom Views
 ^^^^^^^^^^^^
