@@ -46,8 +46,8 @@ def _create_application(
         # pyramid_swagger config
         'pyramid_swagger.schema_directory': schema_directory,
         'pyramid_swagger.swagger_versions': ['2.0'],
-        'bravado_core.validate_requests': True,
-        'bravado_core.validate_responses': True,
+        'pyramid_swagger.enable_request_validation': True,
+        'pyramid_swagger.enable_response_validation': True,
 
         # pyramid_mock_server config
         'pyramid_mock_server.custom_view_packages': packages,
