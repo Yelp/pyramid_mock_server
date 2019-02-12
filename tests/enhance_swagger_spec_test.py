@@ -60,14 +60,20 @@ def test_enhance_specs_save_on_file(tmpdir, expected_enhances_specs):
 
 @pytest.mark.parametrize('ignore_validation', [True, False])
 @mock.patch('pyramid_mock_server.enhance_swagger_spec.Spec', autospec=True)
-def test_enhance_specs_validation(mock_Spec, capsys, ignore_validation):
+def test_enhance_specs_validation(mock_Spec, capsys, ignore_validation, expected_enhances_specs):
     assert main((['--ignore-validation'] if ignore_validation else []) + [
+        '-c',
+        'tests/view_maker_test_files/custom_views',
+        '--',
         'tests/view_maker_test_files/swagger.json',
         'tests/view_maker_test_files/responses',
     ]) == 0
+
     stdout, _ = capsys.readouterr()
 
     if ignore_validation:
         assert not mock_Spec.from_dict.called
     else:
         mock_Spec.from_dict.assert_called_once_with(json.loads(stdout))
+
+    assert expected_enhances_specs == json.loads(stdout)
