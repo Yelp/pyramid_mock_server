@@ -29,10 +29,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/TestResponse",
-              "x-scope": [
-                ""
-              ]
+              "$ref": "#/definitions/TestResponse"
             }
           }
         }
@@ -49,10 +46,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/TestResponse",
-              "x-scope": [
-                ""
-              ]
+              "$ref": "#/definitions/TestResponse"
             }
           }
         }
@@ -83,10 +77,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/TestResponse",
-              "x-scope": [
-                ""
-              ]
+              "$ref": "#/definitions/TestResponse"
             }
           }
         }
@@ -98,10 +89,7 @@
           "200": {
             "description": "Foo bar response",
             "schema": {
-              "$ref": "#/definitions/TestResponse",
-              "x-scope": [
-                ""
-              ]
+              "$ref": "#/definitions/TestResponse"
             }
           }
         }
@@ -113,10 +101,7 @@
           "default": {
             "description": "Foo response",
             "schema": {
-              "$ref": "#/definitions/TestResponse",
-              "x-scope": [
-                ""
-              ]
+              "$ref": "#/definitions/TestResponse"
             }
           }
         },
@@ -144,10 +129,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/TestResponse",
-              "x-scope": [
-                ""
-              ]
+              "$ref": "#/definitions/TestResponse"
             }
           }
         },
@@ -171,10 +153,7 @@
           "200": {
             "description": "The response is generated via a custom view",
             "schema": {
-              "$ref": "#/definitions/TestResponse",
-              "x-scope": [
-                ""
-              ]
+              "$ref": "#/definitions/TestResponse"
             },
             "examples": {
               "application/json": {

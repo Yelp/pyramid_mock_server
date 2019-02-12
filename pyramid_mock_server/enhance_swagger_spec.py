@@ -113,7 +113,8 @@ def main(argv=None):
 
     if not args.ignore_validation:
         # If specs are invalid this is going to throw an exception
-        Spec.from_dict(flattened_enhanced_specs)
+        # NOTE: Spec.from_dict alters the input specs, so we need to copy them
+        Spec.from_dict(deepcopy(flattened_enhanced_specs))
 
     if not args.output:
         print(json.dumps(flattened_enhanced_specs, sort_keys=True, indent=2))
